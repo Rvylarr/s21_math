@@ -8,7 +8,9 @@ long double s21_floor(double x) {
   else if (!S21_IS_NAN(x)) {
     long double rounded_x = (long long int)x;
     if (s21_fabs(x - rounded_x) > 0. && s21_fabs(x) > 0.)
-      if (x < 0.) rounded_x -= 1;
+      if (x < 0.) {
+        rounded_x -= 1;
+      }
     x = rounded_x;
   }
   return x;
@@ -22,7 +24,9 @@ long double s21_ceil(double x) {
   else if (!S21_IS_NAN(x) || !-S21_IS_INF(x) || x != 0) {
     long double rounded_x = (long long int)x;
     if (s21_fabs(x) > 0. && x != rounded_x) {
-      if (x > 0.) rounded_x += 1;
+      if (x > 0.) {
+        rounded_x += 1;
+      }
     }
     x = rounded_x;
   }
@@ -84,7 +88,9 @@ long double s21_cos(double x) {
       res += ch / factor;
       i++;
     }
-    if (cosZero == 1) res = 1.0;
+    if (cosZero == 1) {
+      res = 1.0;
+    }
   }
   return res;
 }
@@ -121,7 +127,7 @@ long double s21_acos(double x) {
 }
 // вычисляет арктангенс
 long double s21_atan(double x) {
-  int sign = 0, invertation = 0, step = 0;
+  int znak = 0, invertation = 0, step = 0;
   long double res = 0, x_square = x * x;
   if (x != x) {
     res = -S21_NAN;
@@ -132,7 +138,7 @@ long double s21_atan(double x) {
   } else {
     if (x < 0.) {
       x *= -1;
-      sign++;
+      znak++;
     }
     if (x > 1.) {
       x = 1. / x;
@@ -154,7 +160,7 @@ long double s21_atan(double x) {
       step--;
     }
     if (invertation) res = S21_PI_2 - res;
-    if (sign) res *= -1;
+    if (znak) res *= -1;
   }
   return res;
 }
@@ -190,7 +196,7 @@ long double s21_fmod(double x, double y) {
   }
   return y != y ? S21_NAN : x;
 }
-// факторизация
+// факториализация
 long double s21_factorial(double x) {
   if (x == x) {
     if (x == 0)
